@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/login/login";
+import SignUp from "./components/signup/signUp";
+import Home from "./components/home/home";
+import { AuthProvider } from "./hooks/useAuth";
+import "./App.css";
+import RandomDog from "./components/random-dog/random-dog";
+import Trivia from "./components/trivia/trivia";
+import Weather from "./components/weather/weather";
+import Users from "./components/users/users";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    return (
+        <BrowserRouter>
+            <AuthProvider>
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/random-dog" element={<RandomDog />} />
+                    <Route path="/trivia" element={<Trivia />} />
+                    <Route path="/weather" element={<Weather />} />
+                    <Route path="/users" element={<Users />} />
+                    <Route path="*" element={<Home />} />
+                </Routes>
+            </AuthProvider>
+        </BrowserRouter>
+    );
+};
 
 export default App;
